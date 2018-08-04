@@ -653,8 +653,8 @@ VOLUME dev/bus/usb:/dev/bus/usb
 #
 #
 RUN mkdir /home/inception \
-&& mkdir /home/inception/Analyzer \
-&& mkdir /home/inception/compiler \
+&& mkdir /home/inception/analyzer \
+&& mkdir /home/inception/translator \
 && mkdir /home/inception/rt-debugger-driver \
 && mkdir /home/inception/samples \
 && mkdir /home/inception/stubs \
@@ -681,10 +681,10 @@ USER inception
 # Clone Inception modules
 #
 #
-RUN git clone --branch master https://gitlab.eurecom.fr/nasm/Inception-analyzer.git ./Analyzer \
-&& git clone --branch master https://gitlab.eurecom.fr/nasm/Inception-compiler.git ./compiler \
-&& git clone --branch master https://gitlab.eurecom.fr/nasm/Inception-debugger-driver.git ./rt-debugger-driver \
-&& git clone --branch master https://gitlab.eurecom.fr/nasm/Inception-samples.git ./samples
+RUN git clone --branch master https://github.com/Inception-framework/analyzer.git ./analyzer \
+&& git clone --branch master https://github.com/Inception-framework/translator.git ./translator \
+&& git clone --branch master https://github.com/Inception-framework/debugger-driver.git ./rt-debugger-driver \
+&& git clone --branch master https://github.com/Inception-framework/usenix-samples.git ./samples
 
 
 #
@@ -790,7 +790,7 @@ USER inception
 
 #Installing Analyzer
 ARG LLVM_VERSION=3.6
-RUN cd ./Analyzer \
+RUN cd ./analyzer \
 && DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" \
 && ./autoconf/AutoRegen.sh ../tools/llvm/llvm3.6/ \
 && CXXFLAGS="-g3 -O0 -fexceptions" CFLAGS="-g3 -O0" ./configure \
@@ -806,15 +806,15 @@ RUN cd ./Analyzer \
 && make -j${MAKE_JOBS} all
 
 USER root
-RUN cd ./Analyzer && make install
+RUN cd ./analyzer && make install
 USER inception
 
 # This is the current working commit with the cmake toolchain
-RUN mkdir ./compiler/build
-RUN cd ./compiler/build && cmake ../ && make -j${MAKE_JOBS} 
+RUN mkdir ./translator/build
+RUN cd ./translator/build && cmake ../ && make -j${MAKE_JOBS} 
 
 USER root
-RUN cd ./compiler/build && make install
+RUN cd ./translator/build && make install
 USER inception
 
 RUN echo "Credits :" \
