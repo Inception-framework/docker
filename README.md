@@ -39,7 +39,7 @@ too much memory and lead to compilation failure (oom killed), in that case it is
 possible to limit the CPUs used with the MAKE_JOBS parameter by setting it to a given value or  . 
 
 ```
-$ docker build --memory="8g" --memory-swap="8g" --cpu-period=100000 --cpu-quota=200000 --build-arg  MAKE_JOBS=2  GIT_USER=$USER --build-arg GIT_PWD=$PASS --no-cache --network host -t inception/inception .
+$ docker build --memory="8g" --memory-swap="8g" --cpu-period=100000 --cpu-quota=200000 --build-arg  MAKE_JOBS=2 --no-cache --network host -t inception/inception .
 ```
 
 it is also possible to use just the right number of jobs with:
