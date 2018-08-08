@@ -51,3 +51,5 @@ MAKE_JOBS=$(($(nproc 2> /dev/null || echo ${MAKE_JOBS})+1))
 ```
 docker run -i -t inception/inception /bin/bash
 ```
+
+Refer to the repository [usenix-samples](https://github.com/Inception-framework/usenix-samples) for supported samples.
