@@ -14,7 +14,7 @@ https://docs.docker.com/install/linux/docker-ce/ubuntu/
 Use the command bellow to start the installation.
 
 ```
-$ docker build --no-cache host -t inception/inception .
+$ docker build --no-cache -t inception/inception .
 ```
 
 ## Troubles
