@@ -17,7 +17,7 @@ Use the command bellow to start the installation.
 $ docker build --no-cache -t inception/inception .
 ```
 
-## Troubles
+## Troubleshooting
 
 ### Network isolation bypass
 
