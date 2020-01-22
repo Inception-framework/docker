@@ -662,7 +662,7 @@ RUN mkdir /home/inception \
 && mkdir /home/inception/tools/llvm \
 && mkdir /home/inception/tools/llvm/build_debug \
 && mkdir /home/inception/tools/llvm/build_release
-RUN mkdir /home/inception/tools/mbed-cli
+#RUN mkdir /home/inception/tools/mbed-cli
 
 #
 #
@@ -714,10 +714,10 @@ RUN cd build_debug && make install
 USER inception
 
 # Install mbed cli
-USER root
-RUN git clone https://github.com/ARMmbed/mbed-cli.git ./mbed-cli
-RUN cd ./mbed-cli && python setup.py install
-USER inception
+#USER root
+#RUN git clone https://github.com/ARMmbed/mbed-cli.git ./mbed-cli
+#RUN cd ./mbed-cli && python setup.py install
+#USER inception
 
 WORKDIR /home/inception/tools
 
